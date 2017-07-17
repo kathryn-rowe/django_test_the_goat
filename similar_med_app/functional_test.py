@@ -14,11 +14,8 @@ class NewVisitorTest(unittest.TestCase):
 		#opens homepage
 		self.browser.get('http://localhost:8000')
 
-		#Begining tests, starting up Django app
-		assert 'Django' in browser.title
-
 		#Homepage gives explanation about what it does
-		self.assertIn('Medication', self.browser.title)
+		self.assertIn('Django', self.browser.title)
 		self.fail('Finish the test!')
 
 		#Search for a drug concept ex Search for alavert
