@@ -11,7 +11,13 @@ class NewVisitorTest(unittest.TestCase):
 	def tearDown(self):
 		self.browser.quit()
 
-	def test_searches(self):
+	def check_for_row_in_list_table(self, row_text):
+
+		table = self.browser.find_element_by_id('id_med_table')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn(row_text, [row.text for row in rows])
+
+	def test_can_start_a_list_and_retrieve_it_later(self):
 
 		#opens homepage
 		self.browser.get('http://localhost:8000')
@@ -22,7 +28,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn('Medication', header_text)
 
 		#Search for a drug concept
-		inputbox = self.browser.find_element_by_id('med_search')
+		inputbox = self.browser.find_element_by_id('id_new_item')
 		self.assertEqual(
 			inputbox.get_attribute('placeholder'),
 			'Enter medication name'
@@ -31,13 +37,23 @@ class NewVisitorTest(unittest.TestCase):
 		#ex Search for alavert
 		inputbox.send_keys('Alavert')
 
-		#Hit enter to search for similar meds
+		#Hit enter to search for similar meds, the page updates, and now the page lists
+		#'1. Alavert' as a similar medication
+		inputbox.send_keys(Keys.ENTER)
+		time.sleep(1)
+		self.check_for_row_in_list_table('1: Alavert')
+
+		#There is still a text box to search another medication.
+		#Enter 'Advil' and search
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox.send_keys('Advil')
 		inputbox.send_keys(Keys.ENTER)
 		time.sleep(1)
 
-		table = self.browser.find_element_by_id('id_med_table')
-		rows = table.find_elements_by_tag_name('tr')
-		self.assertIn('1: Alavert', [row.text for row in rows])
+		#Page updates again, showing complete list
+		self.check_for_row_in_list_table('1: Alavert')
+		self.check_for_row_in_list_table('2: Advil')
+
 		#Drug concepts will appear on the page
 
 		#Select a particular drug concept to serve as the reference drug ex Select Alavert 10 MG Oral Tablet .
