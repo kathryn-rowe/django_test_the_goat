@@ -29,7 +29,7 @@ class NewVisitorTest(unittest.TestCase):
 		)
 
 		#ex Search for alavert
-		inputbox.send_keys('alavert')
+		inputbox.send_keys('Alavert')
 
 		#Hit enter to search for similar meds
 		inputbox.send_keys(Keys.ENTER)
@@ -37,10 +37,7 @@ class NewVisitorTest(unittest.TestCase):
 
 		table = self.browser.find_element_by_id('id_med_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertTrue(
-			any(row.text == '1: Buy peacock feathers' for row in rows),
-			"Medication did not appear in table"
-		)
+		self.assertIn('1: Alavert', [row.text for row in rows])
 		#Drug concepts will appear on the page
 
 		#Select a particular drug concept to serve as the reference drug ex Select Alavert 10 MG Oral Tablet .

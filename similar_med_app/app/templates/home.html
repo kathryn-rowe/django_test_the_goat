@@ -5,8 +5,13 @@
 </head>
 <body>
 	<h1>Medication</h1>
-	<input id="med_search" placeholder="Enter medication name" />
+	<form method="POST">
+		<input name="item_text" id="med_search" placeholder="Enter medication name" />
+		{% csrf_token %}
+	</form>
+	
 	<table id="id_med_table">
+		<tr><td>1: {{ new_item_text }}</td></tr>
     </table>
 </body>
 </html>
