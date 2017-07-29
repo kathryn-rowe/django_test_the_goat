@@ -22,7 +22,7 @@ class NewVisitorTest(unittest.TestCase):
 		#opens homepage
 		self.browser.get('http://localhost:8000')
 
-		#Homepage gives explanation about what it does
+		#Homepage allows user to search for drug type
 		self.assertIn('Medication', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
 		self.assertIn('Medication', header_text)
@@ -41,6 +41,7 @@ class NewVisitorTest(unittest.TestCase):
 		#'1. Alavert' as a similar medication
 		inputbox.send_keys(Keys.ENTER)
 		time.sleep(1)
+
 		self.check_for_row_in_list_table('1: Alavert')
 
 		#There is still a text box to search another medication.
@@ -55,7 +56,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.check_for_row_in_list_table('2: Advil')
 
 		#Drug concepts will appear on the page
-
+		#Homepage gives explanation about what it does
 		#Select a particular drug concept to serve as the reference drug ex Select Alavert 10 MG Oral Tablet .
 
 		#Return a list of all generic and branded drugs that contain the same active ingredients as a reference drug
