@@ -4,16 +4,10 @@
 	<title>Medication Search</title>
 </head>
 <body>
-	<h1>Medication</h1>
+	<h1>Search for a new medication</h1>
 	<form method="POST" action="/app/new">
 		<input name="item_text" id="id_new_item" placeholder="Enter medication name" />
 		{% csrf_token %}
 	</form>
-	
-	<table id="id_med_table">
-		{% for item in items %}
-			<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
-		{% endfor %}
-    </table>
 </body>
 </html>

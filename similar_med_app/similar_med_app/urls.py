@@ -20,5 +20,6 @@ from app import views
 urlpatterns = [
     url(r'^$', views.home_page, name='home'),
     url(r'^app/new$', views.new_list, name='new_list'),
-    url(r'^app/the-only-list-in-the-world/$', views.view_list, name='view_list'),
+    url(r'^app/(\d+)/$', views.view_list, name='view_list'),
+    url(r'^app/(\d+)/add_item$', views.add_item, name='add_item'),
 ]

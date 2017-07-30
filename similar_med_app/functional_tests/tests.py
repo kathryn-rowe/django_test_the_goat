@@ -36,7 +36,7 @@ class NewVisitorTest(LiveServerTestCase):
 		#Homepage allows user to search for drug type
 		self.assertIn('Medication', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
-		self.assertIn('Medication', header_text)
+		self.assertIn('medication', header_text)
 
 		#Search for a drug concept
 		inputbox = self.browser.find_element_by_id('id_new_item')
